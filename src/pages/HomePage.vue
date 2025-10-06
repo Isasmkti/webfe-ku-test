@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent/>
   <div class="h-full w-full mt-6 xs:mt-8 sm:mt-15 md:mt-15 xl:mt-10 ">
     <div class="flex flex-col justify-around items-center bg-white">
 
@@ -169,35 +170,37 @@
 
     </div>
   </div>
+  <FooterComponent/>
 </template>
 
 
 
 <script>
-import Carousel from "../components/CarouselComponent.vue";
 
+import Carousel from "../components/CarouselComponent.vue";
+import NavbarComponent from '../components/NavbarComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
 export default {
-  components: { Carousel },
- data() {
-  return {
-    carouselImages: [
-      {
-        desktopSrc: "https://i.pinimg.com/1200x/29/a7/23/29a7235d9dc8c469b521d2d280ab46dd.jpg",
-        mobileSrc: "https://i.pinimg.com/736x/83/03/39/830339656c7a33fa27d0e528af32ae70.jpg",
-        title: "Slide Pertama",
-        desc: "Deskripsi untuk desktop & mobile"
-      },
-      {
-        desktopSrc: "https://i.pinimg.com/1200x/bd/da/02/bdda02c644f4fea42ded6cb28d448cfb.jpg",
-        mobileSrc: "https://i.pinimg.com/736x/a1/d9/8d/a1d98ddc03faeccba6dfb0f57245a537.jpg",
-        title: "Slide Kedua",
-        desc: "Deskripsi lain"
-      }
-    ]
+  components: { Carousel, NavbarComponent, FooterComponent },
+  data() {
+    return {
+      carouselImages: [
+        {
+          desktopSrc: "https://i.pinimg.com/1200x/29/a7/23/29a7235d9dc8c469b521d2d280ab46dd.jpg",
+          mobileSrc: "https://i.pinimg.com/736x/83/03/39/830339656c7a33fa27d0e528af32ae70.jpg",
+          title: "Slide Pertama",
+          desc: "Deskripsi untuk desktop & mobile"
+        },
+        {
+          desktopSrc: "https://i.pinimg.com/1200x/bd/da/02/bdda02c644f4fea42ded6cb28d448cfb.jpg",
+          mobileSrc: "https://i.pinimg.com/736x/a1/d9/8d/a1d98ddc03faeccba6dfb0f57245a537.jpg",
+          title: "Slide Kedua",
+          desc: "Deskripsi lain"
+        }
+      ]
+    }
   }
-}
-
 };
 
 </script>

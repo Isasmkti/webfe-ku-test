@@ -17,17 +17,23 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-          <input
-            type="password"
-            v-model="password"
-            required
-            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:outline-none"
-            placeholder="masukkan password"
-          />
-        </div>
+          <div class="relative">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              v-model="password"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              placeholder="masukkan password"
+            />
+            <button type="button" @click="showPassword = !showPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <span v-if="showPassword">🙈</span>
+              <span v-else>👁️</span>
+            </button>
+  </div>
+</div>
 
-        <button
-          type="submit"
+<button
+  type="submit"
           class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-xl transition"
           :disabled="loading"
         >
@@ -38,8 +44,8 @@
       </form>
 
       <p class="text-sm text-center text-gray-500 mt-5">
-        Belum punya akun?
-        <a href="#" class="text-purple-600 hover:underline">Daftar</a>
+  Belum punya akun?
+  <router-link to="/register" class="text-purple-600 hover:underline">Daftar</router-link>
       </p>
     </div>
   </div>
@@ -50,11 +56,12 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from './../../stores/auth'
 
+
 const email = ref('')
 const password = ref('')
 const error = ref(null)
 const loading = ref(false)
-
+const showPassword = ref(false)
 const auth = useAuthStore()
 const router = useRouter()
 const route = useRoute()
@@ -63,7 +70,7 @@ async function handleLogin() {
   error.value = null
   loading.value = true
   try {
-    await auth.login(email.value, password.value)
+    await auth.login(email.value.trim().toLowerCase(), password.value)
     // redirect: jika ada query.redirect gunakan itu, else kalau admin bawa ke /admin, kalau bukan ke /
     const redirect = route.query.redirect || (auth.isAdmin ? '/admin' : '/')
     await router.replace(redirect)

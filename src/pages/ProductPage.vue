@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent/>
   <div class="mt-20 w-full h-full mx-auto px-4 py-5">
     <h2 class="text-4xl font-bold text-purple-700 mb-6 text-center">Daftar Produk</h2>
 
@@ -31,10 +32,13 @@
       </div>
     </div>
   </div>
+  <FooterComponent/>
 </template>
 
 
 <script setup>
+import NavbarComponent from '../components/NavbarComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 import { ref, onMounted } from 'vue'
 
 const produkList = ref([])

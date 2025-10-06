@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(email, password) {
       // backend harus mengembalikan { token, user: { id, email, role } }
-      const res = await api.post('/auth/login', { email, password })
+      const res = await api.post('/users/login', { email, password })
       const { token, user } = res.data
       this.token = token
       this.user = user

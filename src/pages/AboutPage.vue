@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent/>
   <div class="h-full w-full mt-20">
     <div class="flex flex-col bg-white">
 
@@ -89,14 +90,16 @@
 
     </div>
   </div>
+  <FooterComponent/>
 </template>
 
 <script>
+import NavbarComponent from '../components/NavbarComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
+
 export default {
-  setup() {
-    return {};
-  }
-};
+  components: { NavbarComponent, FooterComponent }
+}
 </script>
 
 <style lang="scss" scoped>

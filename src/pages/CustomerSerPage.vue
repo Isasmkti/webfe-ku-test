@@ -1,4 +1,5 @@
 <template>
+    <NavbarComponent/>
     <div class="min-h-screen   flex flex-col items-center px-6 py-12 mt-20">
         <!-- Judul -->
         <div class="flex flex-col items-center  xl:flex-row xl:justify-between w-full max-w-3xl mb-10 px-2">
@@ -51,11 +52,20 @@
             </div>
         </div>
     </div>
+    <FooterComponent/>
 </template>
 
+
 <script>
+import NavbarComponent from '../components/NavbarComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
+
 export default {
     name: "CustomerService",
+    components: {
+        NavbarComponent,
+        FooterComponent
+    },
     data() {
         return {
             faqs: [

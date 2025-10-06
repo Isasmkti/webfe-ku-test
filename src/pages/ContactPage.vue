@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent/>
   <div class="min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-500 flex flex-col items-center justify-center px-6 py-12 mt-20">
     <!-- Judul -->
     <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6 text-center">
@@ -59,13 +60,17 @@
       </div>
     </div>
   </div>
+  <FooterComponent/>
 </template>
 
 <script>
 import Swal from "sweetalert2";
+import NavbarComponent from '../components/NavbarComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
 export default {
   name: "ContactPage",
+  components: { NavbarComponent, FooterComponent },
   data() {
     return {
       form: {

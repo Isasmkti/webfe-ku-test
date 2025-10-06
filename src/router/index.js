@@ -38,10 +38,15 @@ const routes = [
   },
 
   {
-     path: '/login', 
-     name: 'Login', 
-     component: LoginView 
-    },
+    path: '/login',
+    name: 'Login',
+    component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../pages/auth/Register.vue')
+  },
   {
     path: '/admin',
     name: 'AdminPage',

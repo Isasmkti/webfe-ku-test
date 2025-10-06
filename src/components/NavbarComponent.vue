@@ -44,6 +44,15 @@
             class="hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300">
             Customer Service
           </router-link>
+          <router-link v-if="auth.isAdmin" to="/admin" class="hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300">
+            Admin Panel
+          </router-link>
+          <router-link v-if="!auth.isAuthenticated" to="/login" class="hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300">
+            Login
+          </router-link>
+          <button v-else @click="handleLogout" class="hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300">
+            Logout
+          </button>
         </div>
       </div>
     </div>
@@ -80,13 +89,35 @@
       >
         Customer Service
       </router-link>
+      <router-link
+        v-if="auth.isAdmin"
+        to="/admin"
+        :class="['block hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300', isActive('/admin')]"
+      >
+        Admin Panel
+      </router-link>
+      <router-link
+        v-if="!auth.isAuthenticated"
+        to="/login"
+        :class="['block hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300', isActive('/login')]"
+      >
+        Login
+      </router-link>
+      <button
+        v-else
+        @click="handleLogout"
+        class="block w-full text-left hover:text-white hover:bg-purple-700 px-3 py-2 rounded-lg transition duration-300"
+      >
+        Logout
+      </button>
     </div>
   </nav>
 </template>
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 
 export default {
   setup() {
@@ -94,9 +125,11 @@ export default {
     const bgClass = ref('bg-black')
     const scrollY = ref(false)
     const route = useRoute()
-    const navRef = ref(null)
+  const navRef = ref(null)
+  const auth = useAuthStore()
+  const router = useRouter()
 
-    const handleScroll = () => {
+  const handleScroll = () => {
       bgClass.value = window.scrollY > 30
         ? 'bg-white rounded-b-2xl xl:rounded-b-4xl transition duration-700 shadow-lg shadow-purple-200/70 ease-out text-purple-500'
         : 'bg-black '
@@ -118,7 +151,12 @@ export default {
         : 'bg-purple-700 hover:text-white'
     }
 
-    return { isOpen, bgClass, scrollY, isActive, navRef }
+    function handleLogout() {
+      auth.logout()
+      router.push('/login')
+    }
+
+    return { isOpen, bgClass, scrollY, isActive, navRef, auth, handleLogout }
   }
 }
 
